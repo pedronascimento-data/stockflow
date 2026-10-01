@@ -1,17 +1,27 @@
 # StockFlow
 
-Sistema de gerenciamento de estoque e vendas desenvolvido como **Projeto Integrador** do curso.
+Sistema de gerenciamento de estoque e vendas desenvolvido como **Projeto Integrador**, com evolução planejada de banco de dados para uma aplicação Java.
 
-O StockFlow foi planejado para pequenas e médias empresas e centraliza o controle de produtos, categorias, fornecedores, clientes, usuários, movimentações de estoque e vendas.
+O projeto simula necessidades comuns de pequenas e médias empresas: cadastro de produtos, fornecedores e clientes, controle de estoque, registro de vendas e perfis de acesso.
 
-## Status do projeto
+## Visão técnica
 
-| Etapa | Conteúdo | Status |
-|---|---|---|
-| 1 | Documentação técnica e requisitos | Concluída |
-| 2 | Modelagem do banco de dados / DER | Concluída |
-| 3 | Criação, povoamento e manipulação do banco MySQL | Concluída |
-| Próximas etapas | Aplicação Java e evolução do sistema | Em desenvolvimento |
+A etapa atual implementa um banco relacional em **MySQL** com oito tabelas de negócio, integridade referencial por chaves estrangeiras, dados de exemplo e operações de consulta, atualização e exclusão.
+
+### Entidades
+
+`usuario` • `categoria` • `fornecedor` • `cliente` • `produto` • `movimentacao_estoque` • `venda` • `item_venda`
+
+### Relacionamentos principais
+
+- categoria 1:N produto
+- fornecedor 1:N produto
+- produto 1:N movimentação de estoque
+- usuário 1:N movimentação de estoque
+- cliente 1:N venda
+- usuário 1:N venda
+- venda 1:N item de venda
+- produto 1:N item de venda
 
 ## Funcionalidades previstas
 
@@ -25,41 +35,47 @@ O StockFlow foi planejado para pequenas e médias empresas e centraliza o contro
 - Consultas e relatórios
 - Autenticação de usuários
 
-## Perfis de usuário
+## Perfis de acesso
 
-- **Administrador** — gerenciamento geral do sistema
-- **Estoquista** — operações relacionadas ao estoque
-- **Vendedor** — operações relacionadas às vendas
+| Perfil | Responsabilidade |
+|---|---|
+| **Administrador** | Gerenciamento geral |
+| **Estoquista** | Operações de estoque |
+| **Vendedor** | Operações de vendas |
 
-## Banco de dados
+## Status
 
-O modelo atual possui oito tabelas:
-
-`usuario`, `categoria`, `fornecedor`, `cliente`, `produto`, `movimentacao_estoque`, `venda` e `item_venda`.
-
-Principais relacionamentos:
-
-- categoria 1:N produto
-- fornecedor 1:N produto
-- produto 1:N movimentacao_estoque
-- usuario 1:N movimentacao_estoque
-- cliente 1:N venda
-- usuario 1:N venda
-- venda 1:N item_venda
-- produto 1:N item_venda
+| Etapa | Entrega | Status |
+|---|---|---|
+| 1 | Documentação técnica e requisitos | ✅ Concluída |
+| 2 | Modelagem do banco / DER | ✅ Concluída |
+| 3 | Criação, povoamento e manipulação em MySQL | ✅ Concluída |
+| Próximas | Aplicação Java e evolução do sistema | 🚧 Em desenvolvimento |
 
 ## Tecnologias
 
 - Java
 - MySQL
+- SQL
 - MySQL Workbench
 - Git e GitHub
 
-A tecnologia de interface será consolidada conforme as próximas etapas do curso.
+## Evidências técnicas
+
+O script atual demonstra:
+
+- criação de banco e tabelas;
+- `PRIMARY KEY`, `FOREIGN KEY` e `UNIQUE`;
+- tipos `ENUM`, `DECIMAL`, datas e valores padrão;
+- relacionamentos entre entidades;
+- carga de dados fictícios;
+- consultas com `SELECT` e `WHERE`;
+- atualizações com `UPDATE`;
+- exclusões respeitando dependências entre tabelas.
 
 ## Estrutura
 
-```
+```text
 stockflow/
 ├── README.md
 ├── .gitignore
@@ -67,24 +83,26 @@ stockflow/
 │   └── StockFlow_Etapa3.sql
 └── docs/
     ├── etapa-1/
-    │   └── README.md
     └── etapa-2/
-        ├── README.md
-        └── stockflow_etapa2.sql
 ```
 
 ## Executando o banco
 
-1. Abra o MySQL Workbench e conecte-se ao MySQL.
+1. Abra o MySQL Workbench e conecte-se a uma instância MySQL.
 2. Abra `database/StockFlow_Etapa3.sql`.
 3. Execute o script completo.
-4. O banco `stockflow` será recriado, povoado e serão executados os exemplos de SELECT, WHERE, UPDATE e DELETE da Etapa 3.
+4. O banco `stockflow` será recriado, povoado e as operações demonstrativas serão executadas.
 
-> O script da Etapa 3 começa com `DROP DATABASE IF EXISTS stockflow`; portanto, ele recria a base para permitir a demonstração completa da atividade.
+> O script utiliza `DROP DATABASE IF EXISTS stockflow` para permitir a recriação completa da base em ambiente de estudo. Execute apenas em um ambiente em que esse banco possa ser removido.
 
-## Projeto Integrador
+## Próximas evoluções
 
-O repositório será atualizado progressivamente conforme as próximas etapas do Projeto Integrador forem desenvolvidas.
+- Camada de aplicação em Java
+- Persistência integrada à aplicação
+- Validações de regras de negócio
+- Interface para operações de estoque e vendas
+- Consultas e relatórios voltados à gestão
 
 ---
+
 Desenvolvido por **Pedro Nascimento**.
